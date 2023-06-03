@@ -54,6 +54,7 @@ public class DoublyLinkedList<T> {
             tail.prev = head;
         } else {
             newNode.next = head;
+            head.prev = newNode;
             head = newNode;
         }
         size++;
@@ -92,40 +93,20 @@ public class DoublyLinkedList<T> {
             size = 0;
         }
 
-        Node<T> curr;
+        Node<T> curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
 
-        if (index + 1 < size / 2) {
-            int i = 0;
-            curr = head;
-
-            while (curr != null && i < index) {
-                curr = curr.next;
-                i++;
-            }
-
-            if (curr.prev == null) {
-                head = head.next;
-                head.prev = null;
-            } else {
-                curr.prev.next = curr.next;
-                curr.next.prev = curr.prev;
-            }
+        if (curr == head) {
+            head = head.next;
+            head.prev = null;
+        } else if (curr == tail) {
+            tail = tail.prev;
+            tail.next = null;
         } else {
-            int i = size - 1;
-            curr = tail;
-
-            while (curr != null && i > index) {
-                curr = curr.prev;
-                i--;
-            }
-
-            if (curr.next == null) {
-                tail = curr.prev;
-                tail.next = null;
-            } else {
-                curr.prev.next = curr.next;
-                curr.next.prev = curr.prev;
-            }
+            curr.prev.next = curr.next;
+            curr.next.prev = curr.prev;
         }
 
         size--;
