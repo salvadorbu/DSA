@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Bruh
  */
-public class Anagram {
+public class GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<List<Integer>, List<String>> map = new HashMap<List<Integer>, List<String>>();
 
